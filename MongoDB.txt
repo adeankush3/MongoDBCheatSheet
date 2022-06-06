@@ -1,0 +1,141 @@
+-MonngoDb is a document database designed foe ease of developing and scalling.
+-It is intuitive and easy to use NoSQL Database.
+-Available as community and enterprise edition.
+-However the community edition itself is very powerfull.
+
+		Main features of MongoDB 
+	1) High Performance:-
+	Data operations on MongoDB are fast and easy because of their NoSQL nature. 
+	Data can be quickly stored, manipulated, and retrieved without any compromise on data integrity.
+
+	2) Scalability:-
+	In the Big Data era, MongoDB data can be distributed across a cluster of machines quickly
+	 and equally, free of bulkiness. The scalability of MongoDB handles a growing amount of data capably.
+	 Sharding is a process in MongoDB used to horizontally scale the data across multiple servers when the size of 
+	data increases.
+
+	3) Availability:-
+	Data is highly available with MongoDB as it makes multiple copies of the same data and sends 
+	copies of data across different servers. In case any server fails, data can be retrieved from another 
+	server without delay.
+
+	4) Flexibility:-
+	MongoDB can easily be combined with different Database Management Systems, both SQL and NoSQL 
+	types.Document-oriented structure makes MongoDB schema dynamically flexible and different types of data can be 
+	easily stored and manipulated.
+
+"Mongo":-Is the command line shell that connects to a specific instance of mongod
+"Mongod":-Is the "Mongo Daemon"it's basically the host process for the database.
+
+
+    "SQL"			"MongoDB"
+1)Database		1)Databse
+2)Tables		2)Collections
+3)Rows			3)Documents(Binary JSON)
+4)Columns		4)Fields
+
+
+					/*MongoDB Cheat Sheet*/
+1)	show dbs or show Database  //Show All DataBase
+2)	db // prints the current database
+	db.dropDatabase() //Delete the Database
+3)	cls //Clear
+4)	use <database_name> //Create DataBase (one insert document )
+5)	show collectios //show All Collections
+	db.createCollection('student') //create collection(student collection name)
+	db.<Collection Name>.drop() //Delete collection
+6)	db.<collectios_name>.insertOne({}) //Create Collection
+
+   						/*CRUD*/
+7)	db.student.insert({"name": "Harry","Lang":"JavaScript","salary":42512,"Email":"harry@gmail.com","Gender":"Male"})//MongoDB commands for rows
+	
+8)	db.student.insert({date: ISODate()})
+9)	db.student.distinct("Name")
+10)	db.student.count({Name: "Harry"}) 
+11)	db.coll.estimatedDocumentCount()  // estimation based on collection metadata
+
+12)	db.coll.countDocuments({Salary: 42545}) // alias for an aggregation pipeline - accurate count
+
+			// Comparison
+	
+
+
+13)	db.student.insertMany([{"name": "rohan","Lang":"python","salary":42712,"Email":"rohan@gmail.com","Gender":"Male"},
+14)	{"name": "lata","Lang":"Java","salary":42545,"Email":"lata@gmail.com","Gender":"Female"},
+15)	{"name": "lovish","Lang":"c++","salary":42772,"Email":"lovish@gmail.com","Gender":"Male"},
+16)	{"name": "shalu","Lang":"c","salary":40012,"Email":"shalu@gmail.com","Gender":"Female"},
+17)	{"name": "hari","Lang":"Android","salary":42502,"Email":"hari@gmail.com","Gender":"Male"},
+18)	{"name": "anuj","Lang":"database","salary":42511,"Email":"anuj@gmail.com","Gender":"Male"}])
+
+19)	db.student.find().pretty() // show all rows in collection (prettified)
+	
+20)	db.student.find(Lang:"c") //search in mongodb database
+	
+21)	db.student.find().pretty().limit(2) //limit the number of rows in op
+	
+22)	db.student.find().pretty().count() //count the number of rows
+23)	db.student.find({Name:"Ankush"}).count()
+
+24)	db.student.find().sort({Name:-1}).pretty() //Asc and  des order
+25)	db.student.findOne({Name:"Ankush"}) //find the firsest row matching the object
+
+Upadate:-
+
+26)	db.student.updateOne({Name:"shalu"},{$set:{Email:"shaluade@gmail.com"}})
+27)	db.student.updateMany({Lang:"c"},{$set:{Lang:"C++"}})
+
+28)	db.student.aggregate([{$match: {Name: "Ankush"}},{$group: {_id: "$Salary", total: {$sum: "$salary"}}},{$sort: {total: -1}}]) //Aggregate
+
+29)	db.coll.find({name: /^Max/}) //regex
+30)	db.coll.find({name: /^Max$/i}) // regex case insensitive
+
+31)	db.coll.update({"Name":"Ankush"}, {$set: {"Salary":72145}}) //update
+
+32)	db.coll.remove({name: "rohan"}) //delete field
+
+
+		/*Other Collection Functions*/
+
+33)	db.student.stats()
+34)	db.student.storageSize()//32864
+35)	db.student.totalIndexSize()//32864
+36)	db.student.totalSize()//73728
+37)	db.student.validate({full: true})
+	
+38)	db.student.getIndexes() //[ { v: 2, key: { _id: 1 }, name: '_id_' } ]
+39)	db.student.getIndexKeys() //[ { _id: 1 } ]
+
+
+
+			MongoDB - Aggregation
+Aggregation is grouping of data
+	Aggregations operations process data records and return computed results. 
+	Aggregation operations group values from multiple documents together, and can perform a variety of operations 
+	on the grouped data to return a single result. In SQL count(*) and with group by is an equivalent of 
+	MongoDB aggregation.
+		db.COLLECTION_NAME.aggregate(AGGREGATE_OPERATION)
+
+40)	db.student.aggregate([{$group : {_id : "$Name", name: {$sum : 1}}}])//Sums up the defined value from all documents in the collection.
+41)	db.student.aggregate([{$group : {_id : "$Name", name: {$avg : 1}}}])//Calculates the average of all given values from all documents in the collection.
+42)	db.student.aggregate([{$group : {_id : "$Name", name: {$min : 1}}}])//Gets the minimum of the corresponding values from all documents in the collection.
+43)	db.student.aggregate([{$group : {_id : "$Name", name: {$max : 1}}}])//Gets the maximum of the corresponding values from all documents in the collection.
+
+
+	:-The index stores the value of a specific field or set of fields, ordered by the value of the field. 
+
+44)	db.student.createIndex({"title":1,"description":-1})
+45)	db.student.dropIndexes({"title":1,"description":-1})
+
+
+		Transactions
+46)	:-session=db.getMongo().startSession()
+47)	:-session.startTransaction()
+48)	:-session.getDatabase('BridgeLabz').student.updateOne({"Name":"Harry"},{$set:{Salary:42000}})
+		//Error:-Transaction numbers are only allowed on a replica set member or mongos
+49)	:-session.commitTransaction()
+
+	Atomacity:- college admisssion prosess done in soft copy
+	consistncy:-
+	isolation:- so many transaction one done after next
+	Durability: data will be saved db (system is crash)
+	
