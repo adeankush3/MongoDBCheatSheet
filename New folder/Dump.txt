@@ -1,0 +1,66 @@
+> show dbs
+Ankush              0.000GB
+AuthenticationDemo  0.000GB
+BridgeLabz          0.000GB
+CodeMongo           0.000GB
+Department          0.000GB
+Field               0.000GB
+MongoDBDemo         0.000GB
+admin               0.000GB
+config              0.000GB
+local               0.000GB
+schooldb            0.000GB
+
+
+
+C:\Program Files\MongoDB\Server\5.0\bin>cd C:\Users\hp\Downloads\mongodb-database-tools-windows-x86_64-100.5.2\bin
+
+C:\Users\hp\Downloads\mongodb-database-tools-windows-x86_64-100.5.2\bin>mongodump
+2022-06-13T08:21:07.271+0530    writing admin.system.users to dump\admin\system.users.bson
+2022-06-13T08:21:07.284+0530    done dumping admin.system.users (4 documents)
+2022-06-13T08:21:07.286+0530    writing admin.system.version to dump\admin\system.version.bson
+2022-06-13T08:21:07.288+0530    done dumping admin.system.version (2 documents)
+2022-06-13T08:21:07.290+0530    writing BridgeLabz.student to dump\BridgeLabz\student.bson
+2022-06-13T08:21:07.310+0530    done dumping BridgeLabz.student (8 documents)
+2022-06-13T08:21:07.311+0530    writing MongoDBDemo.ade to dump\MongoDBDemo\ade.bson
+2022-06-13T08:21:07.314+0530    done dumping MongoDBDemo.ade (6 documents)
+2022-06-13T08:21:07.315+0530    writing Department.Field to dump\Department\Field.bson
+2022-06-13T08:21:07.318+0530    done dumping Department.Field (5 documents)
+2022-06-13T08:21:07.319+0530    writing Ankush.coll to dump\Ankush\coll.bson
+2022-06-13T08:21:07.323+0530    done dumping Ankush.coll (3 documents)
+2022-06-13T08:21:07.327+0530    writing AuthenticationDemo.stud to dump\AuthenticationDemo\stud.bson
+2022-06-13T08:21:07.332+0530    done dumping AuthenticationDemo.stud (3 documents)
+2022-06-13T08:21:07.333+0530    writing schooldb.student to dump\schooldb\student.bson
+2022-06-13T08:21:07.345+0530    done dumping schooldb.student (2 documents)
+2022-06-13T08:21:07.347+0530    writing Ankush.class to dump\Ankush\class.bson
+2022-06-13T08:21:07.350+0530    done dumping Ankush.class (1 document)
+2022-06-13T08:21:07.352+0530    writing MongoDBDemo.books to dump\MongoDBDemo\books.bson
+2022-06-13T08:21:07.355+0530    done dumping MongoDBDemo.books (1 document)
+2022-06-13T08:21:07.607+0530    writing MongoDBDemo.coll to dump\MongoDBDemo\coll.bson
+2022-06-13T08:21:07.609+0530    writing Field.Field to dump\Field\Field.bson
+2022-06-13T08:21:07.614+0530    writing CodeMongo.content to dump\CodeMongo\content.bson
+2022-06-13T08:21:07.616+0530    done dumping MongoDBDemo.coll (7 documents)
+2022-06-13T08:21:07.620+0530    done dumping Field.Field (6 documents)
+2022-06-13T08:21:07.654+0530    done dumping CodeMongo.content (9 documents)
+
+C:\Users\hp\Downloads\mongodb-database-tools-windows-x86_64-100.5.2\bin>
+
+
+> use schooldb
+switched to db schooldb
+
+
+> db.dropDatabase()
+{ "ok" : 1 }
+> show dbs
+Ankush              0.000GB
+AuthenticationDemo  0.000GB
+BridgeLabz          0.000GB
+CodeMongo           0.000GB
+Department          0.000GB
+Field               0.000GB
+MongoDBDemo         0.000GB
+admin               0.000GB
+config              0.000GB
+local               0.000GB
+>

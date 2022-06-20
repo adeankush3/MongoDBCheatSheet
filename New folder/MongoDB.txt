@@ -138,13 +138,4 @@ Aggregation is grouping of data
 	consistncy:-
 	isolation:- so many transaction one done after next
 	Durability: data will be saved db (system is crash)
-
-
-		Index
-	create a collection and insert Data
-why use index
-	-for faster Query
-	-Arrange the Data in sorted order
-	-All new data must find its appropriate place in sorted order
-	-	
 	

@@ -1,0 +1,321 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step1:-Create 5 folder
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	C:\data
+
+	1)shard
+	2)rs1
+	3)rs2
+	4)rs3
+	5)db
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step2:-Excute this CMD(start mongod --configsvr -replSet test -logpath \data\rs1\1.log --dbpath \data\rs1 --port 2001)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	C:\Program Files\MongoDB\Server\5.0\bin>
+	C:\Program Files\MongoDB\Server\5.0\bin>start mongod --configsvr -replSet test -logpath \data\rs1\1.log --dbpath \data\rs1 --port 2001
+	C:\Program Files\MongoDB\Server\5.0\bin>start mongod --configsvr -replSet test -logpath \data\rs2\2.log --dbpath \data\rs2 --port 2002
+	C:\Program Files\MongoDB\Server\5.0\bin>start mongod --configsvr -replSet test -logpath \data\rs3\3.log --dbpath \data\rs3 --port 2003
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step3:-Run CMD(mongo --port 2001)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	C:\Program Files\MongoDB\Server\5.0\bin>mongo --port 2001
+	MongoDB shell version v5.0.8
+	connecting to: mongodb://127.0.0.1:2001/?compressors=disabled&gssapiServiceName=mongodb
+	Implicit session: session { "id" : UUID("a5d0d207-f5b5-4d7f-867f-3a957b5d8f21") }
+	MongoDB server version: 5.0.8
+	================
+	Warning: the "mongo" shell has been superseded by "mongosh",
+	which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+	an upcoming release.
+	For installation instructions, see
+	https://docs.mongodb.com/mongodb-shell/install/
+	================
+	---
+	The server generated these startup warnings when booting:
+        2022-06-09T18:03:39.923+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2022-06-09T18:03:39.924+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server 
+	with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. 
+	If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+	---
+	---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+	---
+	>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+Step4:-Type the config Parameter as given below
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	> config = {_id:"test",members:[{_id:0,host:"localhost:2001"},{_id:1,host:"localhost:2002"},{_id:2,host:"localhost:2003"}]};
+	{
+        "_id" : "test",
+        "members" : [
+                {
+                        "_id" : 0,
+                        "host" : "localhost:2001"
+                },
+                {
+                        "_id" : 1,
+                        "host" : "localhost:2002"
+                },
+                {
+                        "_id" : 2,
+                        "host" : "localhost:2003"
+                }
+        ]
+	}
+	>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step5:-Initiate configruration as given below
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+> rs.initiate(config)
+	{
+        	"ok" : 1,
+        	"$gleStats" : {
+                	"lastOpTime" : Timestamp(1654778700, 1),
+                	"electionId" : ObjectId("000000000000000000000000")
+        	},
+        	"lastCommittedOpTime" : Timestamp(1654778700, 1)
+	}
+	test:SECONDARY>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step6:-Check the status
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test:SECONDARY> rs.status()
+{
+        "set" : "test",
+        "date" : ISODate("2022-06-09T12:47:45.092Z"),
+        "myState" : 1,
+        "term" : NumberLong(1),
+        "syncSourceHost" : "",
+        "syncSourceId" : -1,
+        "configsvr" : true,
+        "heartbeatIntervalMillis" : NumberLong(2000),
+        "majorityVoteCount" : 2,
+        "writeMajorityCount" : 2,
+        "votingMembersCount" : 3,
+        "writableVotingMembersCount" : 3,
+        "optimes" : {
+                "lastCommittedOpTime" : {
+                        "ts" : Timestamp(1654778864, 1),
+                        "t" : NumberLong(1)
+                },
+                "lastCommittedWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                "readConcernMajorityOpTime" : {
+                        "ts" : Timestamp(1654778864, 1),
+                        "t" : NumberLong(1)
+                },
+                "appliedOpTime" : {
+                        "ts" : Timestamp(1654778864, 1),
+                        "t" : NumberLong(1)
+                },
+                "durableOpTime" : {
+                        "ts" : Timestamp(1654778864, 1),
+                        "t" : NumberLong(1)
+                },
+                "lastAppliedWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                "lastDurableWallTime" : ISODate("2022-06-09T12:47:44.748Z")
+        },
+        "lastStableRecoveryTimestamp" : Timestamp(1654778820, 1),
+        "electionCandidateMetrics" : {
+                "lastElectionReason" : "electionTimeout",
+                "lastElectionDate" : ISODate("2022-06-09T12:45:11.091Z"),
+                "electionTerm" : NumberLong(1),
+                "lastCommittedOpTimeAtElection" : {
+                        "ts" : Timestamp(1654778700, 1),
+                        "t" : NumberLong(-1)
+                },
+                "lastSeenOpTimeAtElection" : {
+                        "ts" : Timestamp(1654778700, 1),
+                        "t" : NumberLong(-1)
+                },
+                "numVotesNeeded" : 2,
+                "priorityAtElection" : 1,
+                "electionTimeoutMillis" : NumberLong(10000),
+                "numCatchUpOps" : NumberLong(0),
+                "newTermStartDate" : ISODate("2022-06-09T12:45:11.211Z"),
+                "wMajorityWriteAvailabilityDate" : ISODate("2022-06-09T12:45:12.422Z")
+        },
+        "members" : [
+                {
+                        "_id" : 0,
+                        "name" : "localhost:2001",
+                        "health" : 1,
+                        "state" : 1,
+                        "stateStr" : "PRIMARY",
+                        "uptime" : 847,
+                        "optime" : {
+                                "ts" : Timestamp(1654778864, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDate" : ISODate("2022-06-09T12:47:44Z"),
+                        "lastAppliedWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                        "lastDurableWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                        "syncSourceHost" : "",
+                        "syncSourceId" : -1,
+                        "infoMessage" : "",
+                        "electionTime" : Timestamp(1654778711, 1),
+                        "electionDate" : ISODate("2022-06-09T12:45:11Z"),
+                        "configVersion" : 1,
+                        "configTerm" : 1,
+                        "self" : true,
+                        "lastHeartbeatMessage" : ""
+                },
+                {
+                        "_id" : 1,
+                        "name" : "localhost:2002",
+                        "health" : 1,
+                        "state" : 2,
+                        "stateStr" : "SECONDARY",
+                        "uptime" : 164,
+                        "optime" : {
+                                "ts" : Timestamp(1654778862, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDurable" : {
+                                "ts" : Timestamp(1654778862, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDate" : ISODate("2022-06-09T12:47:42Z"),
+                        "optimeDurableDate" : ISODate("2022-06-09T12:47:42Z"),
+                        "lastAppliedWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                        "lastDurableWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                        "lastHeartbeat" : ISODate("2022-06-09T12:47:43.240Z"),
+                        "lastHeartbeatRecv" : ISODate("2022-06-09T12:47:44.785Z"),
+                        "pingMs" : NumberLong(0),
+                        "lastHeartbeatMessage" : "",
+                        "syncSourceHost" : "localhost:2001",
+                        "syncSourceId" : 0,
+                        "infoMessage" : "",
+                        "configVersion" : 1,
+                        "configTerm" : 1
+                },
+                {
+                        "_id" : 2,
+                        "name" : "localhost:2003",
+                        "health" : 1,
+                        "state" : 2,
+                        "stateStr" : "SECONDARY",
+                        "uptime" : 164,
+                        "optime" : {
+                                "ts" : Timestamp(1654778862, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDurable" : {
+                                "ts" : Timestamp(1654778862, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDate" : ISODate("2022-06-09T12:47:42Z"),
+                        "optimeDurableDate" : ISODate("2022-06-09T12:47:42Z"),
+                        "lastAppliedWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                        "lastDurableWallTime" : ISODate("2022-06-09T12:47:44.748Z"),
+                        "lastHeartbeat" : ISODate("2022-06-09T12:47:43.242Z"),
+                        "lastHeartbeatRecv" : ISODate("2022-06-09T12:47:44.773Z"),
+                        "pingMs" : NumberLong(0),
+                        "lastHeartbeatMessage" : "",
+                        "syncSourceHost" : "localhost:2001",
+                        "syncSourceId" : 0,
+                        "infoMessage" : "",
+                        "configVersion" : 1,
+                        "configTerm" : 1
+                }
+        ],
+        "ok" : 1,
+        "$gleStats" : {
+                "lastOpTime" : Timestamp(1654778700, 1),
+                "electionId" : ObjectId("7fffffff0000000000000001")
+        },
+        "lastCommittedOpTime" : Timestamp(1654778864, 1),
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1654778864, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        },
+        "operationTime" : Timestamp(1654778864, 1)
+}
+test:PRIMARY>
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+start mongod --shardsvr --port 2005 -logpath \data\shard\s0\log\s0.log --dbpath \data\shard\s0
+start mongod --shardsvr --port 2006 -logpath \data\shard\s1\log\s1.log --dbpath \data\shard\s1
+C:\Program Files\MongoDB\Server\5.0\bin>start mongod --shardsvr --port 2005 -logpath \data\shard\s0\log\s0.log --dbpath \data\shard\s0
+\\\\ Note: not opne in cmd server
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+C:\Program Files\MongoDB\Server\5.0\bin>start mongod -replSet --shardsvr --port 2005 -logpath \data\shard\s0\log\s0.log --dbpath \data\shard\s0
+
+C:\Program Files\MongoDB\Server\5.0\bin>start mongod -replSet --shardsvr --port 2006 -logpath \data\shard\s1\log\s1.log --dbpath \data\shard\s1
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+C:\Program Files\MongoDB\Server\5.0\bin>mongo --port 2007
+MongoDB shell version v5.0.8
+connecting to: mongodb://127.0.0.1:2007/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("6f071733-24fa-4c65-b187-dafeea97c89d") }
+MongoDB server version: 5.0.8
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2022-06-10T07:48:23.485+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2022-06-10T07:48:23.486+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. 
+Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. 
+If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+---
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+mongos> sh.addShard("localhost:2005")
+{
+        "topologyVersion" : {
+                "processId" : ObjectId("62a1e8d7f4a259dbaa6bad44"),
+                "counter" : NumberLong(11)
+        },
+        "ok" : 0,
+        "errmsg" : "localhost:2005 does not have a master. If this is a replica set, ensure that it has a healthy primary and that the set has been properly initiated.",
+        "code" : 6,
+        "codeName" : "HostUnreachable",
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1654827843, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        },
+        "operationTime" : Timestamp(1654827842, 1)
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+mongos> sh.addShard("localhost:2006")
+{
+        "topologyVersion" : {
+                "processId" : ObjectId("62a1e8d7f4a259dbaa6bad44"),
+                "counter" : NumberLong(11)
+        },
+        "ok" : 0,
+        "errmsg" : "localhost:2006 does not have a master. If this is a replica set, ensure that it has a healthy primary and that the set has been properly initiated.",
+        "code" : 6,
+        "codeName" : "HostUnreachable",
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1654827903, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        },
+        "operationTime" : Timestamp(1654827903, 1)
+}

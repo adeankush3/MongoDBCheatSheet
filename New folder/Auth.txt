@@ -1,0 +1,211 @@
+test> show dbs
+Ankush               76.00 KiB
+AuthenticationDemo   72.00 KiB
+BridgeLabz          112.00 KiB
+CodeMongo            72.00 KiB
+Department           92.00 KiB
+Field                72.00 KiB
+MongoDBDemo         120.00 KiB
+admin               180.00 KiB
+config              108.00 KiB
+local                72.00 KiB
+schooldb             40.00 KiB
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test> use schooldb
+switched to db schooldb
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+schooldb> db.student.find().pretty()
+[
+  {
+    _id: ObjectId("62a3321ddb230d3db915fa18"),
+    name: 'ankush',
+    age: 27
+  }
+]
+schooldb>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+schooldb> db.student.insertOne({'name':"shalu",'age':23})
+{
+  acknowledged: true,
+  insertedId: ObjectId("62a3341569731304cf5188bd")
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+schooldb> db.student.find().pretty()
+[
+  {
+    _id: ObjectId("62a3321ddb230d3db915fa18"),
+    name: 'ankush',
+    age: 27
+  },
+  { _id: ObjectId("62a3341569731304cf5188bd"), name: 'shalu', age: 23 }
+]
+schooldb>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+schooldb> db.createUser({user:"ade",pwd:"654321",roles:[{role:"read",db:"schooldb"}]})
+{ ok: 1 }
+schooldb>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+schooldb> show users
+[
+  {
+    _id: 'schooldb.ade',
+    userId: UUID("6af6366a-1dc2-48e7-bda4-de58c1af5fd5"),
+    user: 'ade',
+    db: 'schooldb',
+    roles: [ { role: 'read', db: 'schooldb' } ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+  }
+]
+schooldb>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+schooldb> show roles
+[
+  {
+    role: 'userAdmin',
+    db: 'schooldb',
+    isBuiltin: true,
+    roles: [],
+    inheritedRoles: []
+  },
+  {
+    role: 'dbAdmin',
+    db: 'schooldb',
+    isBuiltin: true,
+    roles: [],
+    inheritedRoles: []
+  },
+  {
+    role: 'dbOwner',
+    db: 'schooldb',
+    isBuiltin: true,
+    roles: [],
+    inheritedRoles: []
+  },
+  {
+    role: 'readWrite',
+    db: 'schooldb',
+    isBuiltin: true,
+    roles: [],
+    inheritedRoles: []
+  },
+  {
+    role: 'read',
+    db: 'schooldb',
+    isBuiltin: true,
+    roles: [],
+    inheritedRoles: []
+  },
+  {
+    role: 'enableSharding',
+    db: 'schooldb',
+    isBuiltin: true,
+    roles: [],
+    inheritedRoles: []
+  }
+]
+schooldb>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#processManagement:
+
+security:
+  authorization: enabled
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+C:\Users\hp>mongosh
+Current Mongosh Log ID: 62a336ff351ba7051b6d307e
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.5.0
+Using MongoDB:          5.0.8
+Using Mongosh:          1.5.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+Warning: Found ~/.mongorc.js, but not ~/.mongoshrc.js. ~/.mongorc.js will not be loaded.
+  You may want to copy or rename ~/.mongorc.js to ~/.mongoshrc.js.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+test> use schooldb
+switched to db schooldb
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+schooldb> db.student.find()
+MongoServerError: command find requires authentication
+schooldb>
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+C:\Users\hp>mongosh --authenticationDatabase "schooldb" -u "ade" -p "654321"
+Current Mongosh Log ID: 62a338829ad7c1146e248a65
+Connecting to:          mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&authSource=schooldb&appName=mongosh+1.5.0
+Using MongoDB:          5.0.8
+Using Mongosh:          1.5.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+Warning: Found ~/.mongorc.js, but not ~/.mongoshrc.js. ~/.mongorc.js will not be loaded.
+  You may want to copy or rename ~/.mongorc.js to ~/.mongoshrc.js.
+test>
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test> use schooldb
+switched to db schooldb
+schooldb> db.student.find()
+[
+  {
+    _id: ObjectId("62a3321ddb230d3db915fa18"),
+    name: 'ankush',
+    age: 27
+  },
+  { _id: ObjectId("62a3341569731304cf5188bd"), name: 'shalu', age: 23 }
+]
+schooldb>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+schooldb> db.student.insertOne({'name':"sumit",'age':36})
+MongoServerError: not authorized on schooldb to execute command { insert: "student", documents: [ { name: "sumit", age: 36, _id: ObjectId('62a338fd4644b982c53fda74') } ], ordered: true, lsid: { id: UUID("26fa1071-0174-4e36-af7c-07e08e14fe69") }, $db: "schooldb" }
+schooldb>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+admin> show collections
+MongoServerError: not authorized on admin to execute command { listCollections: 1, filter: {}, cursor: {}, nameOnly: true, authorizedCollections: false, lsid: { id: UUID("bddea2b8-ed1e-47d1-adae-b7df7ce20ae5") }, $db: "admin", $readPreference: { mode: "primaryPreferred" } }
+admin>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#security:
+  #authorization: enabled
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+admin> db.createUser({user:"boss", pwd:"123456", roles:["root"]})
+{ ok: 1 }
+admin>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+admin> show users
+[
+  {
+    _id: 'admin.ankush',
+    userId: UUID("f7212b07-bdf8-4db3-a4ba-2c9bce1864ab"),
+    user: 'ankush',
+    db: 'admin',
+    roles: [ { role: 'read', db: 'AuthenticationDemo' } ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+  },
+  {
+    _id: 'admin.boss',
+    userId: UUID("475cbd4d-8952-4950-89ae-3905e39791d4"),
+    user: 'boss',
+    db: 'admin',
+    roles: [ { role: 'root', db: 'admin' } ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+  }
+]
+admin>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------

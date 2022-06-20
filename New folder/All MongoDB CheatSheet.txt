@@ -1,0 +1,59 @@
+> db.mydb.help();
+DBCollection help
+        db.mydb.find().help() - show DBCursor help
+        db.mydb.bulkWrite( operations, <optional params> ) - bulk execute write operations, optional parameters are: w, wtimeout, j
+        db.mydb.count( query = {}, <optional params> ) - count the number of documents that matches the query, optional parameters are: limit, skip, hint, maxTimeMS
+        db.mydb.copyTo(newColl) - duplicates collection by copying all documents to newColl; no indexes are copied.
+        db.mydb.convertToCapped(maxBytes) - calls {convertToCapped:'mydb', size:maxBytes}} command
+        db.mydb.createIndex(keypattern[,options])
+        db.mydb.createIndexes([keypatterns], <options>)
+        db.mydb.dataSize()
+        db.mydb.deleteOne( filter, <optional params> ) - delete first matching document, optional parameters are: w, wtimeout, j
+        db.mydb.deleteMany( filter, <optional params> ) - delete all matching documents, optional parameters are: w, wtimeout, j
+        db.mydb.distinct( key, query, <optional params> ) - e.g. db.mydb.distinct( 'x' ), optional parameters are: maxTimeMS
+        db.mydb.drop() drop the collection
+        db.mydb.dropIndex(index) - e.g. db.mydb.dropIndex( "indexName" ) or db.mydb.dropIndex( { "indexKey" : 1 } )
+        db.mydb.dropIndexes()
+        db.mydb.ensureIndex(keypattern[,options]) - DEPRECATED, use createIndex() instead
+        db.mydb.explain().help() - show explain help
+        db.mydb.reIndex()
+        db.mydb.find([query],[fields]) - query is an optional query filter. fields is optional set of fields to return.
+                                                      e.g. db.mydb.find( {x:77} , {name:1, x:1} )
+        db.mydb.find(...).count()
+        db.mydb.find(...).limit(n)
+        db.mydb.find(...).skip(n)
+        db.mydb.find(...).sort(...)
+        db.mydb.findOne([query], [fields], [options], [readConcern])
+        db.mydb.findOneAndDelete( filter, <optional params> ) - delete first matching document, optional parameters are: projection, sort, maxTimeMS
+        db.mydb.findOneAndReplace( filter, replacement, <optional params> ) - replace first matching document, optional parameters are: projection, sort, maxTimeMS, upsert, returnNewDocument
+        db.mydb.findOneAndUpdate( filter, update, <optional params> ) - update first matching document, optional parameters are: projection, sort, maxTimeMS, upsert, returnNewDocument
+        db.mydb.getDB() get DB object associated with collection
+        db.mydb.getPlanCache() get query plan cache associated with collection
+        db.mydb.getIndexes()
+        db.mydb.group( { key : ..., initial: ..., reduce : ...[, cond: ...] } )
+        db.mydb.insert(obj)
+        db.mydb.insertOne( obj, <optional params> ) - insert a document, optional parameters are: w, wtimeout, j
+        db.mydb.insertMany( [objects], <optional params> ) - insert multiple documents, optional parameters are: w, wtimeout, j
+        db.mydb.mapReduce( mapFunction , reduceFunction , <optional params> )
+        db.mydb.aggregate( [pipeline], <optional params> ) - performs an aggregation on a collection; returns a cursor
+        db.mydb.remove(query)
+        db.mydb.replaceOne( filter, replacement, <optional params> ) - replace the first matching document, optional parameters are: upsert, w, wtimeout, j
+        db.mydb.renameCollection( newName , <dropTarget> ) renames the collection.
+        db.mydb.runCommand( name , <options> ) runs a db command with the given name where the first param is the collection name
+        db.mydb.save(obj)
+        db.mydb.stats({scale: N, indexDetails: true/false, indexDetailsKey: <index key>, indexDetailsName: <index name>})
+        db.mydb.storageSize() - includes free space allocated to this collection
+        db.mydb.totalIndexSize() - size in bytes of all the indexes
+        db.mydb.totalSize() - storage allocated for all data and indexes
+        db.mydb.update( query, object[, upsert_bool, multi_bool] ) - instead of two flags, you can pass an object with fields: upsert, multi
+        db.mydb.updateOne( filter, update, <optional params> ) - update the first matching document, optional parameters are: upsert, w, wtimeout, j
+        db.mydb.updateMany( filter, update, <optional params> ) - update all matching documents, optional parameters are: upsert, w, wtimeout, j
+        db.mydb.validate( <full> ) - SLOW
+        db.mydb.getShardVersion() - only for use with sharding
+        db.mydb.getShardDistribution() - prints statistics about data distribution in the cluster
+        db.mydb.getSplitKeysForChunks( <maxChunkSize> ) - calculates split points over all chunks and returns splitter function
+        db.mydb.getWriteConcern() - returns the write concern used for any operations on this collection, inherited from server/db if set
+        db.mydb.setWriteConcern( <write concern doc> ) - sets the write concern for writes to the collection
+        db.mydb.unsetWriteConcern( <write concern doc> ) - unsets the write concern for writes to the collection
+        db.mydb.latencyStats() - display operation latency histograms for this collection
+> db.mydb.help();

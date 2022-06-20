@@ -1,0 +1,218 @@
+Import and Export Data
+You can use MongoDB Compass to import and export data to and from collections. 
+Compass supports import and export for both JSON and CSV files. 
+To import or export data to or from a collection, navigate to the detailed 
+collection view by either selecting the collection from the Databases tab or 
+clicking the collection in the left-side navigation.
+
+
+
+
+MongoDB Compass can import data into a collection from either a JSON or CSV file.
+
+-------------------------------------------------------------------------------------------------------------
+> show dbs
+Ankush              0.000GB
+AuthenticationDemo  0.000GB
+BridgeLabz          0.000GB
+CodeMongo           0.000GB
+Department          0.000GB
+Field               0.000GB
+MongoDBDemo         0.000GB
+admin               0.000GB
+config              0.000GB
+local               0.000GB
+> use Field
+switched to db Field
+> show collections
+Field
+> db.Field.insert({name:"ade"})
+WriteResult({ "nInserted" : 1 })
+> db.Field.insert({name:"ankush"})
+WriteResult({ "nInserted" : 1 })
+> db.Field.insert({name:"ramrao"})
+WriteResult({ "nInserted" : 1 })
+> db.emp.insert({name:"ramrao"})
+WriteResult({ "nInserted" : 1 })
+> db.emp.insert({name:"aa"})
+WriteResult({ "nInserted" : 1 })
+> show collections
+Field
+emp
+> db.dropDatabase()
+{ "ok" : 1 }
+> show dbs
+Ankush              0.000GB
+AuthenticationDemo  0.000GB
+BridgeLabz          0.000GB
+CodeMongo           0.000GB
+Department          0.000GB
+MongoDBDemo         0.000GB
+admin               0.000GB
+config              0.000GB
+local               0.000GB
+> show dbs
+Ankush              0.000GB
+AuthenticationDemo  0.000GB
+BridgeLabz          0.000GB
+CodeMongo           0.000GB
+Department          0.000GB
+Field               0.000GB
+MongoDBDemo         0.000GB
+admin               0.000GB
+config              0.000GB
+local               0.000GB
+> use Field
+switched to db Field
+> show collections
+Field
+emp
+>
+-------------------------------------------------------------------------------------------------------------
+Microsoft Windows [Version 10.0.19044.1706]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\hp>cd C:\backup
+
+C:\backup>mongodump
+2022-06-13T20:20:42.132+0530    writing admin.system.users to dump\admin\system.users.bson
+2022-06-13T20:20:42.137+0530    done dumping admin.system.users (4 documents)
+2022-06-13T20:20:42.138+0530    writing admin.system.version to dump\admin\system.version.bson
+2022-06-13T20:20:42.139+0530    done dumping admin.system.version (2 documents)
+2022-06-13T20:20:42.141+0530    writing MongoDBDemo.coll to dump\MongoDBDemo\coll.bson
+2022-06-13T20:20:42.144+0530    done dumping MongoDBDemo.coll (7 documents)
+2022-06-13T20:20:42.145+0530    writing MongoDBDemo.ade to dump\MongoDBDemo\ade.bson
+2022-06-13T20:20:42.147+0530    done dumping MongoDBDemo.ade (6 documents)
+2022-06-13T20:20:42.148+0530    writing Department.Field to dump\Department\Field.bson
+2022-06-13T20:20:42.155+0530    done dumping Department.Field (5 documents)
+2022-06-13T20:20:42.156+0530    writing AuthenticationDemo.stud to dump\AuthenticationDemo\stud.bson
+2022-06-13T20:20:42.158+0530    done dumping AuthenticationDemo.stud (3 documents)
+2022-06-13T20:20:42.159+0530    writing Ankush.coll to dump\Ankush\coll.bson
+2022-06-13T20:20:42.162+0530    done dumping Ankush.coll (3 documents)
+2022-06-13T20:20:42.163+0530    writing Field.emp to dump\Field\emp.bson
+2022-06-13T20:20:42.166+0530    done dumping Field.emp (2 documents)
+2022-06-13T20:20:42.168+0530    writing Ankush.class to dump\Ankush\class.bson
+2022-06-13T20:20:42.171+0530    done dumping Ankush.class (1 document)
+2022-06-13T20:20:42.172+0530    writing MongoDBDemo.books to dump\MongoDBDemo\books.bson
+2022-06-13T20:20:42.175+0530    done dumping MongoDBDemo.books (1 document)
+2022-06-13T20:20:42.455+0530    writing Field.Field to dump\Field\Field.bson
+2022-06-13T20:20:42.457+0530    writing CodeMongo.content to dump\CodeMongo\content.bson
+2022-06-13T20:20:42.458+0530    writing BridgeLabz.student to dump\BridgeLabz\student.bson
+2022-06-13T20:20:42.462+0530    done dumping Field.Field (9 documents)
+2022-06-13T20:20:42.463+0530    done dumping CodeMongo.content (9 documents)
+2022-06-13T20:20:42.467+0530    done dumping BridgeLabz.student (8 documents)
+
+C:\backup>mongoresoter
+'mongoresoter' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\backup>mongorestore
+2022-06-13T20:23:48.159+0530    using default 'dump' directory
+2022-06-13T20:23:48.162+0530    preparing collections to restore from
+2022-06-13T20:23:48.190+0530    reading metadata for AuthenticationDemo.stud from dump\AuthenticationDemo\stud.metadata.json
+2022-06-13T20:23:48.192+0530    reading metadata for BridgeLabz.student from dump\BridgeLabz\student.metadata.json
+2022-06-13T20:23:48.194+0530    reading metadata for CodeMongo.content from dump\CodeMongo\content.metadata.json
+2022-06-13T20:23:48.196+0530    reading metadata for MongoDBDemo.coll from dump\MongoDBDemo\coll.metadata.json
+2022-06-13T20:23:48.198+0530    reading metadata for MongoDBDemo.books from dump\MongoDBDemo\books.metadata.json
+2022-06-13T20:23:48.202+0530    reading metadata for Ankush.class from dump\Ankush\class.metadata.json
+2022-06-13T20:23:48.204+0530    reading metadata for Ankush.coll from dump\Ankush\coll.metadata.json
+2022-06-13T20:23:48.206+0530    reading metadata for Department.Field from dump\Department\Field.metadata.json
+2022-06-13T20:23:48.207+0530    reading metadata for Field.Field from dump\Field\Field.metadata.json
+2022-06-13T20:23:48.209+0530    reading metadata for Field.emp from dump\Field\emp.metadata.json
+2022-06-13T20:23:48.211+0530    reading metadata for MongoDBDemo.ade from dump\MongoDBDemo\ade.metadata.json
+2022-06-13T20:23:48.216+0530    restoring to existing collection BridgeLabz.student without dropping
+2022-06-13T20:23:48.220+0530    restoring to existing collection MongoDBDemo.ade without dropping
+2022-06-13T20:23:48.222+0530    restoring BridgeLabz.student from dump\BridgeLabz\student.bson
+2022-06-13T20:23:48.223+0530    restoring MongoDBDemo.ade from dump\MongoDBDemo\ade.bson
+2022-06-13T20:23:48.228+0530    restoring to existing collection CodeMongo.content without dropping
+2022-06-13T20:23:48.233+0530    restoring CodeMongo.content from dump\CodeMongo\content.bson
+2022-06-13T20:23:48.289+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b18801f04d61a8fda81f9') }
+2022-06-13T20:23:48.289+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b195c63dff4ea8b8f7b0d') }
+2022-06-13T20:23:48.292+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b1bc9ac8e05dd5272ad0f') }
+2022-06-13T20:23:48.294+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b1bc9ac8e05dd5272ad10') }
+2022-06-13T20:23:48.296+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b1bc9ac8e05dd5272ad11') }
+2022-06-13T20:23:48.297+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b1bc9ac8e05dd5272ad12') }
+2022-06-13T20:23:48.299+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b1bc9ac8e05dd5272ad13') }
+2022-06-13T20:23:48.301+0530    continuing through error: E11000 duplicate key error collection: BridgeLabz.student index: _id_ dup key: { _id: ObjectId('629b73f5ac8e05dd5272ad14') }
+2022-06-13T20:23:48.303+0530    finished restoring BridgeLabz.student (0 documents, 8 failures)
+2022-06-13T20:23:48.306+0530    restoring to existing collection Department.Field without dropping
+2022-06-13T20:23:48.311+0530    restoring Department.Field from dump\Department\Field.bson
+2022-06-13T20:23:48.345+0530    continuing through error: E11000 duplicate key error collection: Department.Field index: _id_ dup key: { _id: ObjectId('6298c810fa5930cefc905346') }
+2022-06-13T20:23:48.345+0530    continuing through error: E11000 duplicate key error collection: Department.Field index: _id_ dup key: { _id: ObjectId('6298c86dfa5930cefc905348') }
+2022-06-13T20:23:48.348+0530    continuing through error: E11000 duplicate key error collection: Department.Field index: _id_ dup key: { _id: ObjectId('6298c8dcfa5930cefc905349') }
+2022-06-13T20:23:48.351+0530    continuing through error: E11000 duplicate key error collection: Department.Field index: _id_ dup key: { _id: ObjectId('6298c8fcfa5930cefc90534a') }
+2022-06-13T20:23:48.352+0530    continuing through error: E11000 duplicate key error collection: Department.Field index: _id_ dup key: { _id: ObjectId('62997171c39442832bc8f18c') }
+2022-06-13T20:23:48.355+0530    finished restoring Department.Field (0 documents, 5 failures)
+2022-06-13T20:23:48.358+0530    restoring to existing collection Ankush.coll without dropping
+2022-06-13T20:23:48.359+0530    restoring Ankush.coll from dump\Ankush\coll.bson
+2022-06-13T20:23:48.366+0530    continuing through error: E11000 duplicate key error collection: Ankush.coll index: _id_ dup key: { _id: "62a0a4fac53b99d3a719483e" }
+2022-06-13T20:23:48.366+0530    continuing through error: E11000 duplicate key error collection: Ankush.coll index: _id_ dup key: { _id: "62a0a5de78b66d398d77ce95" }
+2022-06-13T20:23:48.368+0530    continuing through error: E11000 duplicate key error collection: Ankush.coll index: _id_ dup key: { _id: "62a32952728669a62db0868e" }
+2022-06-13T20:23:48.374+0530    finished restoring Ankush.coll (0 documents, 3 failures)
+2022-06-13T20:23:48.375+0530    restoring to existing collection MongoDBDemo.coll without dropping
+2022-06-13T20:23:48.377+0530    restoring MongoDBDemo.coll from dump\MongoDBDemo\coll.bson
+2022-06-13T20:23:48.391+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.coll index: _id_ dup key: { _id: ObjectId('629636c512a3031123f4ffdc') }
+2022-06-13T20:23:48.391+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.coll index: _id_ dup key: { _id: ObjectId('629636c612a3031123f4ffdd') }
+2022-06-13T20:23:48.393+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.coll index: _id_ dup key: { _id: ObjectId('629636c612a3031123f4ffde') }
+2022-06-13T20:23:48.395+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.coll index: _id_ dup key: { _id: ObjectId('629636c612a3031123f4ffdf') }
+2022-06-13T20:23:48.397+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.coll index: _id_ dup key: { _id: ObjectId('629636c612a3031123f4ffe0') }
+2022-06-13T20:23:48.399+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.coll index: _id_ dup key: { _id: ObjectId('629636c612a3031123f4ffe1') }
+2022-06-13T20:23:48.404+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.coll index: _id_ dup key: { _id: ObjectId('629636c912a3031123f4ffe2') }
+2022-06-13T20:23:48.406+0530    finished restoring MongoDBDemo.coll (0 documents, 7 failures)
+2022-06-13T20:23:48.409+0530    restoring to existing collection AuthenticationDemo.stud without dropping
+2022-06-13T20:23:48.410+0530    restoring AuthenticationDemo.stud from dump\AuthenticationDemo\stud.bson
+2022-06-13T20:23:48.444+0530    continuing through error: E11000 duplicate key error collection: AuthenticationDemo.stud index: _id_ dup key: { _id: ObjectId('62a0a4fac53b99d3a719483e') }
+2022-06-13T20:23:48.445+0530    continuing through error: E11000 duplicate key error collection: AuthenticationDemo.stud index: _id_ dup key: { _id: ObjectId('62a0a5de78b66d398d77ce95') }
+2022-06-13T20:23:48.448+0530    continuing through error: E11000 duplicate key error collection: AuthenticationDemo.stud index: _id_ dup key: { _id: ObjectId('62a32952728669a62db0868e') }
+2022-06-13T20:23:48.450+0530    finished restoring AuthenticationDemo.stud (0 documents, 3 failures)
+2022-06-13T20:23:48.507+0530    restoring Field.emp from dump\Field\emp.bson
+2022-06-13T20:23:48.523+0530    finished restoring Field.emp (2 documents, 0 failures)
+2022-06-13T20:23:48.523+0530    restoring to existing collection MongoDBDemo.books without dropping
+2022-06-13T20:23:48.526+0530    restoring MongoDBDemo.books from dump\MongoDBDemo\books.bson
+2022-06-13T20:23:48.546+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.books index: _id_ dup key: { _id: ObjectId('62973070703f212563da953e') }
+2022-06-13T20:23:48.547+0530    finished restoring MongoDBDemo.books (0 documents, 1 failure)
+2022-06-13T20:23:48.550+0530    restoring to existing collection Ankush.class without dropping
+2022-06-13T20:23:48.552+0530    restoring Ankush.class from dump\Ankush\class.bson
+2022-06-13T20:23:48.554+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.ade index: _id_ dup key: { _id: ObjectId('62a59c55f91764ed37aeeda0') }
+2022-06-13T20:23:48.559+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.ade index: _id_ dup key: { _id: ObjectId('62a59c55f91764ed37aeeda1') }
+2022-06-13T20:23:48.561+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.ade index: _id_ dup key: { _id: ObjectId('62a59c55f91764ed37aeeda2') }
+2022-06-13T20:23:48.562+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.ade index: _id_ dup key: { _id: ObjectId('62a59c55f91764ed37aeeda3') }
+2022-06-13T20:23:48.563+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.ade index: _id_ dup key: { _id: ObjectId('62a59c55f91764ed37aeeda4') }
+2022-06-13T20:23:48.564+0530    continuing through error: E11000 duplicate key error collection: MongoDBDemo.ade index: _id_ dup key: { _id: ObjectId('62a59c55f91764ed37aeeda5') }
+2022-06-13T20:23:48.566+0530    continuing through error: E11000 duplicate key error collection: Ankush.class index: _id_ dup key: { _id: ObjectId('6296db13703f212563da953d') }
+2022-06-13T20:23:48.567+0530    finished restoring MongoDBDemo.ade (0 documents, 6 failures)
+2022-06-13T20:23:48.584+0530    finished restoring Ankush.class (0 documents, 1 failure)
+2022-06-13T20:23:48.604+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999d15947eb2376d3f7314') }
+2022-06-13T20:23:48.604+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999dc0947eb2376d3f7315') }
+2022-06-13T20:23:48.605+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999de5947eb2376d3f7316') }
+2022-06-13T20:23:48.606+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999e11947eb2376d3f7317') }
+2022-06-13T20:23:48.607+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999e3a947eb2376d3f7318') }
+2022-06-13T20:23:48.608+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999e61947eb2376d3f7319') }
+2022-06-13T20:23:48.609+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999e94947eb2376d3f731a') }
+2022-06-13T20:23:48.611+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999ed5947eb2376d3f731b') }
+2022-06-13T20:23:48.612+0530    continuing through error: E11000 duplicate key error collection: CodeMongo.content index: _id_ dup key: { _id: ObjectId('62999efd947eb2376d3f731c') }
+2022-06-13T20:23:48.613+0530    finished restoring CodeMongo.content (0 documents, 9 failures)
+2022-06-13T20:23:48.618+0530    restoring Field.Field from dump\Field\Field.bson
+2022-06-13T20:23:48.661+0530    finished restoring Field.Field (9 documents, 0 failures)
+2022-06-13T20:23:48.662+0530    restoring users from dump\admin\system.users.bson
+2022-06-13T20:23:48.747+0530    no indexes to restore for collection Field.Field
+2022-06-13T20:23:48.748+0530    no indexes to restore for collection CodeMongo.content
+2022-06-13T20:23:48.751+0530    no indexes to restore for collection Field.emp
+2022-06-13T20:23:48.752+0530    no indexes to restore for collection AuthenticationDemo.stud
+2022-06-13T20:23:48.754+0530    restoring indexes for collection BridgeLabz.student from metadata
+2022-06-13T20:23:48.756+0530    no indexes to restore for collection MongoDBDemo.books
+2022-06-13T20:23:48.758+0530    no indexes to restore for collection MongoDBDemo.ade
+2022-06-13T20:23:48.759+0530    no indexes to restore for collection MongoDBDemo.coll
+2022-06-13T20:23:48.761+0530    index: &idx.IndexDocument{Options:primitive.M{"background":false, "name":"Record", "v":2}, Key:primitive.D{primitive.E{Key:"Salary", Value:1}}, PartialFilterExpression:primitive.D(nil)}
+2022-06-13T20:23:48.762+0530    no indexes to restore for collection Ankush.coll
+2022-06-13T20:23:48.764+0530    no indexes to restore for collection Ankush.class
+2022-06-13T20:23:48.766+0530    restoring indexes for collection Department.Field from metadata
+2022-06-13T20:23:48.769+0530    index: &idx.IndexDocument{Options:primitive.M{"name":"Record_1", "v":2}, Key:primitive.D{primitive.E{Key:"Record", Value:1}}, PartialFilterExpression:primitive.D(nil)}
+2022-06-13T20:23:48.772+0530    index: &idx.IndexDocument{Options:primitive.M{"name":"Gender_1", "v":2}, Key:primitive.D{primitive.E{Key:"Gender", Value:1}}, PartialFilterExpression:primitive.D(nil)}
+2022-06-13T20:23:48.781+0530    11 document(s) restored successfully. 43 document(s) failed to restore.
+
+C:\backup>mongodump --db Field --collection emp
+2022-06-13T20:25:51.976+0530    writing Field.emp to dump\Field\emp.bson
+2022-06-13T20:25:51.985+0530    done dumping Field.emp (2 documents)
+
+C:\backup>
